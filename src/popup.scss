@@ -1,0 +1,40 @@
+@mixin u-ddd() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.popup {
+  max-width: 300px;
+  padding: 16px;
+}
+
+.bookmark-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bookmark-item {
+  border: 1px solid black;
+  padding: 8px 16px;
+  &__title {
+    color: red;
+    @include u-ddd();
+  }
+
+  &__url {
+    @include u-ddd();
+  }
+}
+
+.bookmark-item__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookmark-item__url {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "bookmarks-random-three",
+  "version": "1.0.0",
+  "description": "This project contains a blank WebExtension addon, a \"white canvas\" for your new experiment of extending and remixing the Web.",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-web-ext-tool": "^0.1.2",
+    "sass": "^1.26.5",
+    "web-ext": "^4.2.0"
+  }
+}
