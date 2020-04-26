@@ -1,11 +1,19 @@
-@mixin u-ddd() {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .popup {
-  max-width: 300px;
+  width: 300px;
   padding: 16px;
+}
+
+.popup__divider {
+  margin-top: 16px;
+  border-top: 1px solid black;
+  padding-top: 16px;
+}
+
+.popup__load-btn {
+  display: block;
+  width: 100%;
+  padding: 4px;
+  text-align: center;
 }
 
 .bookmark-list {
@@ -17,12 +25,22 @@
 .bookmark-item {
   border: 1px solid black;
   padding: 8px 16px;
-  &__title {
-    color: red;
-    @include u-ddd();
-  }
+}
 
-  &__url {
-    @include u-ddd();
-  }
+.bookmark-item__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookmark-item__url {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookmark-item__del {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
 }
