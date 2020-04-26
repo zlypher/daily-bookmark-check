@@ -1,6 +1,12 @@
 const updateBookmarks = (bookmarks) => {
+  const numBookmarks = bookmarks.length;
+  const emptyItems =
+    numBookmarks < 3
+      ? new Array(3 - numBookmarks).fill(getEmptyBookmarkItem())
+      : [];
+
   const listElem = document.querySelector(".js-bookmark-list");
-  listElem.innerHTML = bookmarkList(bookmarks);
+  listElem.innerHTML = bookmarkList([...bookmarks, ...emptyItems]);
 };
 
 const toItem = (bookmark) => {
@@ -23,9 +29,20 @@ const loadBookmarks = async () => {
   return getRandom(bookmarks, 3).map(toItem);
 };
 
+const getEmptyBookmarkItem = () => {
+  return {
+    status: "empty",
+    bookmark: {
+      title: "-",
+      url: "-",
+      id: "-",
+    },
+  };
+};
+
 const bookmarkList = (bookmarks) => `
 <ul class="bookmark-list ">
-    ${bookmarks.map(bookmarkListItem)}
+    ${bookmarks.map(bookmarkListItem).join("")}
 </ul>`;
 
 const bookmarkListItem = (bookmark) => `
