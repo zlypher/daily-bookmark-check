@@ -1,11 +1,10 @@
 {
-  "name": "bookmarks-random-three",
+  "name": "daily-bookmark-check",
   "version": "1.0.0",
   "description": "This project contains a blank WebExtension addon, a \"white canvas\" for your new experiment of extending and remixing the Web.",
   "main": "background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel watch"
+    "dev": "parcel watch src/popup.html"
   },
   "author": "",
   "license": "ISC",

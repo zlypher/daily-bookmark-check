@@ -26,12 +26,3 @@ const bookmarkItem = (bookmark) => `
     <div class="bookmark-item__title">${bookmark.title}</div>
     <div class="bookmark-item__url">${bookmark.url}</div>
 </div>`;
-
-{
-  /* <li class="bookmark-list__item">
-    <div class="bookmark-item">
-        <div class="bookmark-item__title">This is the bookmark title</div>
-        <div class="bookmark-item__url">/this/is/the/bookmark/path</div>
-    </div>
-</li> */
-}

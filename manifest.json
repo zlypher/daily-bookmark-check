@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "bookmarks-random-three",
+  "name": "Daily Bookmark Check",
   "version": "0.0.1",
   "description": "TBD",
   "author": "Thomas Prochazka",
@@ -10,7 +10,7 @@
   "browser_action": {
     "browser_style": true,
     "default_title": "View the Links in this Page",
-    "default_popup": "extension/popup.html",
-    "default_icon": "extension/images/icon.png"
+    "default_popup": "src/popup.html",
+    "default_icon": "src/images/icon.png"
   }
 }

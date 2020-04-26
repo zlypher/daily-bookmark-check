@@ -26,15 +26,3 @@
     @include u-ddd();
   }
 }
-
-.bookmark-item__title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bookmark-item__url {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
