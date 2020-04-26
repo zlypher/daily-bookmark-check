@@ -1,3 +1,7 @@
+button {
+  cursor: pointer;
+}
+
 .popup {
   width: 300px;
   padding: 16px;
@@ -23,8 +27,26 @@
 }
 
 .bookmark-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid black;
   padding: 8px 16px;
+}
+
+.bookmark-item--active {
+  // TBD
+  border: 1px solid green;
+}
+
+.bookmark-item--deleted {
+  border: 1px solid red;
+}
+
+.bookmark-item__wrapper {
+  min-width: 0;
+  margin-right: 8px;
 }
 
 .bookmark-item__title {

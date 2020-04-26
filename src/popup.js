@@ -3,16 +3,24 @@ const updateBookmarks = (bookmarks) => {
   listElem.innerHTML = bookmarkList(bookmarks);
 };
 
+const toItem = (bookmark) => {
+  return {
+    status: "active",
+    id: bookmark.id,
+    bookmark: bookmark,
+  };
+};
+
 const loadBookmarks = async () => {
   const bookmarks = (await browser.bookmarks.search({})).filter(
     (b) => b.type === "bookmark",
   );
 
   if (bookmarks.length <= 3) {
-    return bookmarks;
+    return bookmarks.map(toItem);
   }
 
-  return getRandom(bookmarks, 3);
+  return getRandom(bookmarks, 3).map(toItem);
 };
 
 const bookmarkList = (bookmarks) => `
@@ -25,19 +33,36 @@ const bookmarkListItem = (bookmark) => `
     ${bookmarkItem(bookmark)}
 </li>`;
 
-const bookmarkItem = (bookmark) => `
-<div class="bookmark-item js-bookmark-item" data-id="${bookmark.id}">
-  <div>
+const bookmarkItem = ({ status, bookmark }) => `
+<div class="bookmark-item js-bookmark-item bookmark-item--${status}" data-id="${bookmark.id}">
+  <div class="bookmark-item__wrapper">
     <div class="bookmark-item__title" title="${bookmark.title}">${bookmark.title}</div>
     <div class="bookmark-item__url" title="${bookmark.url}">${bookmark.url}</div>
+  </div>
   <div>
-  <div>
-    <button class="bookmark-item__del js-bookmark-item__del">X</button>
+    <button class="bookmark-item__del js-bookmark-item__del" title="Remove bookmark">X</button>
   </div>
 </div>`;
 
-const onDeleteClick = () => {
+const onDeleteClick = async (elem) => {
   console.log("on delete");
+
+  const item = elem.closest(".js-bookmark-item");
+  if (!item) {
+    return;
+  }
+
+  const id = item.getAttribute("data-id");
+  if (!id) {
+    return;
+  }
+
+  try {
+    await browser.bookmarks.remove(id);
+    const singleItem = bookmarks.find((b) => b.id === id);
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 // https://stackoverflow.com/a/19270021/733368
@@ -70,22 +95,7 @@ function getRandom(arr, n) {
       }
 
       if (evt.target.classList.contains("js-bookmark-item__del")) {
-        const item = evt.target.closest(".js-bookmark-item");
-        if (!item) {
-          return;
-        }
-
-        const id = item.getAttribute("data-id");
-        if (!id) {
-          return;
-        }
-
-        try {
-          // const singleBookmark = bookmarks.find((b) => b.id === id);
-          await browser.bookmarks.remove(id);
-        } catch (e) {
-          console.error(e);
-        }
+        await onDeleteClick(evt.target);
       }
     },
     true,
