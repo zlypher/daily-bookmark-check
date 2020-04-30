@@ -69,7 +69,11 @@ const bookmarkItem = ({ status, bookmark }) => `
     <div class="bookmark-item__url" title="${bookmark.url}">${bookmark.url}</div>
   </div>
   <div>
-    <button class="bookmark-item__del js-bookmark-item__del" title="Remove bookmark">X</button>
+    <!-- <button class="bookmark-item__del js-bookmark-item__del" title="Remove bookmark">X</button> -->
+    <div class="toggle" role="switch" tabindex="0">
+      <span class="toggle__bg"></span>
+      <span class="toggle__btn"></span>
+    </div>
   </div>
 </div>`;
 
@@ -125,6 +129,11 @@ function getRandom(arr, n) {
       if (evt.target.classList.contains("js-popup__load-btn")) {
         const newBookmarks = await loadBookmarks();
         updateBookmarks(newBookmarks);
+        return;
+      }
+
+      if (evt.target.classList.contains("js-popup__clean-btn")) {
+        console.log("clean");
         return;
       }
 

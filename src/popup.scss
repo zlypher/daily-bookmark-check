@@ -3,21 +3,30 @@ button {
 }
 
 .popup {
-  width: 300px;
+  width: 400px;
+}
+
+.popup__btns {
+  display: flex;
+  flex-direction: row;
   padding: 16px;
 }
 
-.popup__divider {
-  margin-top: 16px;
-  border-top: 1px solid black;
-  padding-top: 16px;
+.popup__btn {
+  display: block;
+  padding: 4px;
+  text-align: center;
+  flex: 100% 1 1;
+  background: none;
+  border: 1px solid gray;
+  border-radius: 4px;
+  line-height: 30px;
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 .popup__load-btn {
-  display: block;
-  width: 100%;
-  padding: 4px;
-  text-align: center;
+  margin-right: 16px;
 }
 
 .bookmark-list {
@@ -26,12 +35,15 @@ button {
   margin: 0;
 }
 
+.bookmark-list__item {
+  border-bottom: 1px solid grey;
+}
+
 .bookmark-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
   padding: 8px 16px;
 }
 
@@ -53,16 +65,44 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 14px;
 }
 
 .bookmark-item__url {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 10px;
 }
 
 .bookmark-item__del {
   border-radius: 50%;
   width: 24px;
   height: 24px;
+}
+
+.toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle__bg {
+  flex: 1 1 0%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: gray;
+  transition: background-color 0.3s linear;
+}
+
+.toggle__btn {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.3s ease 0s;
+  transform: translateX(2px);
 }
