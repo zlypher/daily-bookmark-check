@@ -1,3 +1,15 @@
+const getLastCheckedDate = async () => {
+  const { lastCheckedDate } = await browser.storage.local.get(
+    "lastCheckedDate",
+  );
+  return lastCheckedDate;
+};
+
+const setLastCheckedDate = async (date) =>
+  await browser.storage.local.set({
+    lastCheckedDate: date,
+  });
+
 const updateBookmarks = (bookmarks) => {
   const numBookmarks = bookmarks.length;
   const emptyItems =
@@ -98,6 +110,11 @@ function getRandom(arr, n) {
 }
 
 (async () => {
+  const lastCheckedDate = await getLastCheckedDate();
+  console.log(lastCheckedDate); // undefined, if not set
+
+  await setLastCheckedDate(new Date());
+
   const bookmarks = await loadBookmarks();
   updateBookmarks(bookmarks);
   console.log(bookmarks);

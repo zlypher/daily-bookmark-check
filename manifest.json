@@ -4,9 +4,7 @@
   "version": "0.0.1",
   "description": "TBD",
   "author": "Thomas Prochazka",
-  "permissions": [
-    "bookmarks"
-  ],
+  "permissions": ["bookmarks", "storage"],
   "browser_action": {
     "browser_style": true,
     "default_title": "View the Links in this Page",
