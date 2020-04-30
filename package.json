@@ -1,13 +1,13 @@
 {
   "name": "daily-bookmark-check",
   "version": "1.0.0",
-  "description": "This project contains a blank WebExtension addon, a \"white canvas\" for your new experiment of extending and remixing the Web.",
+  "description": "Daily Bookmark Check helps you cleanup your bookmarks step by step.",
   "main": "background.js",
   "scripts": {
     "dev": "parcel watch src/popup.html"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Thomas Prochazka <thomas.prochazka@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-web-ext-tool": "^0.1.2",
