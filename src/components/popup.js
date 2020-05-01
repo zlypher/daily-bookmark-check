@@ -1,21 +1,7 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-import { getRandom } from "./utils";
-import { h, render } from "preact";
+import { getRandom } from "../utils";
+import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
-import { BookmarkList } from "./components/bookmark-list";
-
-const getLastCheckedDate = async () => {
-  const { lastCheckedDate } = await browser.storage.local.get(
-    "lastCheckedDate",
-  );
-  return lastCheckedDate;
-};
-
-const setLastCheckedDate = async (date) =>
-  await browser.storage.local.set({
-    lastCheckedDate: date,
-  });
+import { BookmarkList } from "./bookmark-list";
 
 const toItem = (bookmark) => {
   return {
@@ -53,7 +39,7 @@ const getEmptyBookmarkItem = () => {
   };
 };
 
-const Popup = () => {
+export const Popup = () => {
   const [bookmarks, setBookmarks] = useState([]);
   useEffect(async () => {
     const data = await loadBookmarks();
@@ -95,11 +81,3 @@ const Popup = () => {
     </div>
   );
 };
-
-(async () => {
-  render(<Popup />, document.getElementById("root"));
-  const lastCheckedDate = await getLastCheckedDate();
-  console.log(lastCheckedDate); // undefined, if not set
-
-  await setLastCheckedDate(new Date());
-})();
