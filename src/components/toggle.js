@@ -1,0 +1,10 @@
+import { h } from "preact";
+
+export const Toggle = (props) => {
+  return (
+    <div onClick={props.onClick} className="toggle" role="switch" tabindex="0">
+      <span className="toggle__bg"></span>
+      <span className="toggle__btn"></span>
+    </div>
+  );
+};

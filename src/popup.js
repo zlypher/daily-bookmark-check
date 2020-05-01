@@ -1,6 +1,9 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { getRandom } from "./utils";
+import { h, render } from "preact";
+import { useState, useEffect } from "preact/hooks";
+import { BookmarkList } from "./components/bookmark-list";
 
 const getLastCheckedDate = async () => {
   const { lastCheckedDate } = await browser.storage.local.get(
@@ -14,17 +17,6 @@ const setLastCheckedDate = async (date) =>
     lastCheckedDate: date,
   });
 
-const updateBookmarks = (bookmarks) => {
-  const numBookmarks = bookmarks.length;
-  const emptyItems =
-    numBookmarks < 3
-      ? new Array(3 - numBookmarks).fill(getEmptyBookmarkItem())
-      : [];
-
-  const listElem = document.querySelector(".js-bookmark-list");
-  listElem.innerHTML = bookmarkList([...bookmarks, ...emptyItems]);
-};
-
 const toItem = (bookmark) => {
   return {
     status: "active",
@@ -34,15 +26,20 @@ const toItem = (bookmark) => {
 };
 
 const loadBookmarks = async () => {
-  const bookmarks = (await browser.bookmarks.search({})).filter(
+  const allBookmarks = (await browser.bookmarks.search({})).filter(
     (b) => b.type === "bookmark",
   );
 
-  if (bookmarks.length <= 3) {
-    return bookmarks.map(toItem);
-  }
+  const numBookmarks = allBookmarks.length;
+  const emptyItems =
+    numBookmarks < 3
+      ? new Array(3 - numBookmarks).fill(getEmptyBookmarkItem())
+      : [];
 
-  return getRandom(bookmarks, 3).map(toItem);
+  const selectedBookmarks =
+    numBookmarks <= 3 ? allBookmarks : getRandom(allBookmarks, 3);
+
+  return [...selectedBookmarks, ...emptyItems].map(toItem);
 };
 
 const getEmptyBookmarkItem = () => {
@@ -56,80 +53,53 @@ const getEmptyBookmarkItem = () => {
   };
 };
 
-const bookmarkList = (bookmarks) => `
-<ul class="bookmark-list ">
-    ${bookmarks.map(bookmarkListItem).join("")}
-</ul>`;
+const Popup = () => {
+  const [bookmarks, setBookmarks] = useState([]);
+  useEffect(async () => {
+    const data = await loadBookmarks();
+    setBookmarks(data);
+  }, []);
 
-const bookmarkListItem = (bookmark) => `
-<li class="bookmark-list__item">
-    ${bookmarkItem(bookmark)}
-</li>`;
+  const onToggleItemStatus = () => {
+    console.log("toggle item status");
+  };
 
-const bookmarkItem = ({ status, bookmark }) => `
-<div class="bookmark-item js-bookmark-item bookmark-item--${status}" data-id="${bookmark.id}">
-  <div class="bookmark-item__wrapper">
-    <div class="bookmark-item__title" title="${bookmark.title}">${bookmark.title}</div>
-    <div class="bookmark-item__url" title="${bookmark.url}">${bookmark.url}</div>
-  </div>
-  <div>
-    <!-- <button class="bookmark-item__del js-bookmark-item__del" title="Remove bookmark">X</button> -->
-    <div class="toggle" role="switch" tabindex="0">
-      <span class="toggle__bg"></span>
-      <span class="toggle__btn"></span>
+  const onLoadClick = () => {
+    console.log("load");
+  };
+
+  const onCleanClick = () => {
+    console.log("clean");
+  };
+
+  return (
+    <div className="popup">
+      <BookmarkList
+        bookmarks={bookmarks}
+        onToggleItemStatus={onToggleItemStatus}
+      />
+      <div className="popup__btns">
+        <button
+          className="js-popup__load-btn popup__load-btn popup__btn"
+          onClick={onLoadClick}
+        >
+          Load New
+        </button>
+        <button
+          className="js-popup__clean-btn popup__clean-btn popup__btn"
+          onClick={onCleanClick}
+        >
+          Clean
+        </button>
+      </div>
     </div>
-  </div>
-</div>`;
-
-const onDeleteClick = async (elem) => {
-  console.log("on delete");
-
-  const item = elem.closest(".js-bookmark-item");
-  if (!item) {
-    return;
-  }
-
-  const id = item.getAttribute("data-id");
-  if (!id) {
-    return;
-  }
-
-  try {
-    await browser.bookmarks.remove(id);
-    const singleItem = bookmarks.find((b) => b.id === id);
-  } catch (e) {
-    console.error(e);
-  }
+  );
 };
 
 (async () => {
+  render(<Popup />, document.getElementById("root"));
   const lastCheckedDate = await getLastCheckedDate();
   console.log(lastCheckedDate); // undefined, if not set
 
   await setLastCheckedDate(new Date());
-
-  const bookmarks = await loadBookmarks();
-  updateBookmarks(bookmarks);
-  console.log(bookmarks);
-
-  document.addEventListener(
-    "click",
-    async (evt) => {
-      if (evt.target.classList.contains("js-popup__load-btn")) {
-        const newBookmarks = await loadBookmarks();
-        updateBookmarks(newBookmarks);
-        return;
-      }
-
-      if (evt.target.classList.contains("js-popup__clean-btn")) {
-        console.log("clean");
-        return;
-      }
-
-      if (evt.target.classList.contains("js-bookmark-item__del")) {
-        await onDeleteClick(evt.target);
-      }
-    },
-    true,
-  );
 })();
