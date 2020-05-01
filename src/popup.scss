@@ -4,39 +4,39 @@ button {
 
 .popup {
   width: 400px;
-}
 
-.popup__btns {
-  display: flex;
-  flex-direction: row;
-  padding: 16px;
-}
+  &__btns {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+  }
 
-.popup__btn {
-  display: block;
-  padding: 4px;
-  text-align: center;
-  flex: 100% 1 1;
-  background: none;
-  border: 1px solid gray;
-  border-radius: 4px;
-  line-height: 30px;
-  font-size: 16px;
-  letter-spacing: 1px;
-}
+  &__btn {
+    display: block;
+    padding: 4px;
+    text-align: center;
+    flex: 100% 1 1;
+    background: none;
+    border: 1px solid gray;
+    border-radius: 4px;
+    line-height: 30px;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
 
-.popup__load-btn {
-  margin-right: 16px;
+  &__load-btn {
+    margin-right: 16px;
+  }
 }
 
 .bookmark-list {
   list-style: none;
   padding: 0;
   margin: 0;
-}
 
-.bookmark-list__item {
-  border-bottom: 1px solid grey;
+  &__item {
+    border-bottom: 1px solid grey;
+  }
 }
 
 .bookmark-item {
@@ -45,40 +45,40 @@ button {
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-}
 
-.bookmark-item--active {
-  // TBD
-  border: 1px solid green;
-}
+  &--active {
+    // TBD
+    border: 1px solid green;
+  }
 
-.bookmark-item--deleted {
-  border: 1px solid red;
-}
+  &--deleted {
+    border: 1px solid red;
+  }
 
-.bookmark-item__wrapper {
-  min-width: 0;
-  margin-right: 8px;
-}
+  &__wrapper {
+    min-width: 0;
+    margin-right: 8px;
+  }
 
-.bookmark-item__title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 14px;
-}
+  &__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+  }
 
-.bookmark-item__url {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 10px;
-}
+  &__url {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10px;
+  }
 
-.bookmark-item__del {
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  &__del {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .toggle {
@@ -87,22 +87,22 @@ button {
   align-items: center;
   width: 40px;
   height: 20px;
-}
 
-.toggle__bg {
-  flex: 1 1 0%;
-  height: 100%;
-  border-radius: 10px;
-  background-color: gray;
-  transition: background-color 0.3s linear;
-}
+  &__bg {
+    flex: 1 1 0%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: gray;
+    transition: background-color 0.3s linear;
+  }
 
-.toggle__btn {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: white;
-  transition: transform 0.3s ease 0s;
-  transform: translateX(2px);
+  &__btn {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.3s ease 0s;
+    transform: translateX(2px);
+  }
 }

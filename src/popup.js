@@ -1,3 +1,7 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import { getRandom } from "./utils";
+
 const getLastCheckedDate = async () => {
   const { lastCheckedDate } = await browser.storage.local.get(
     "lastCheckedDate",
@@ -97,21 +101,6 @@ const onDeleteClick = async (elem) => {
     console.error(e);
   }
 };
-
-// https://stackoverflow.com/a/19270021/733368
-function getRandom(arr, n) {
-  var result = new Array(n),
-    len = arr.length,
-    taken = new Array(len);
-  if (n > len)
-    throw new RangeError("getRandom: more elements taken than available");
-  while (n--) {
-    var x = Math.floor(Math.random() * len);
-    result[n] = arr[x in taken ? taken[x] : x];
-    taken[x] = --len in taken ? taken[len] : len;
-  }
-  return result;
-}
 
 (async () => {
   const lastCheckedDate = await getLastCheckedDate();

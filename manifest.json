@@ -4,11 +4,14 @@
   "version": "0.0.1",
   "description": "TBD",
   "author": "Thomas Prochazka",
-  "permissions": ["bookmarks", "storage"],
+  "permissions": [
+    "bookmarks",
+    "storage"
+  ],
   "browser_action": {
     "browser_style": true,
     "default_title": "View the Links in this Page",
-    "default_popup": "src/popup.html",
+    "default_popup": "dist/popup.html",
     "default_icon": "src/images/icon.png"
   }
 }
