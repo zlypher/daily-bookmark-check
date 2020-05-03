@@ -7,3 +7,5 @@ export const getAllBookmarks = async () => {
     (b) => b.type === "bookmark",
   );
 };
+
+export const getMessage = (...args) => browser.i18n.getMessage(...args);

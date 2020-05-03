@@ -3,7 +3,7 @@ import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { BookmarkList } from "./bookmark-list";
 import "./popup.scss";
-import { getAllBookmarks, removeBookmarks } from "../extension-api";
+import { getAllBookmarks, removeBookmarks, getMessage } from "../extension-api";
 
 const toItem = (bookmark) => {
   return {
@@ -90,14 +90,14 @@ export const Popup = () => {
           className="js-popup__load-btn popup__load-btn popup__btn"
           onClick={onLoadClick}
         >
-          Load New
+          {getMessage("buttonLoad")}
         </button>
         <button
           className="js-popup__clean-btn popup__clean-btn popup__btn"
           onClick={onCleanClick}
           disabled={isCleanEnabled ? null : "disabled"}
         >
-          Clean
+          {getMessage("buttonClean")}
         </button>
       </div>
     </div>

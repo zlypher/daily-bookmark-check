@@ -1,0 +1,14 @@
+{
+  "buttonClean": {
+    "message": "Clean",
+    "description": "Label of the 'Clean' button",
+    "hash": "4cf5f1794b28cd8dc5dd333f50bef7a4"
+  },
+  "buttonLoad": {
+    "message": "Load",
+    "description": "Label of the 'Load' button",
+    "hash": "d2e858432cac4e7ba0695d6aa1ed88da"
+  },
+
+  "__WET_LOCALE__": { "message": "en" }
+}

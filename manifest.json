@@ -10,5 +10,6 @@
     "default_title": "View the Links in this Page",
     "default_popup": "dist/index.html",
     "default_icon": "src/images/icon.png"
-  }
+  },
+  "default_locale": "de"
 }

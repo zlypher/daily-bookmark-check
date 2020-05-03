@@ -1,0 +1,12 @@
+{
+  "buttonClean": {
+    "message": "Aufräumen",
+    "description": "Label of the 'Clean' button"
+  },
+  "buttonLoad": {
+    "message": "Neu laden",
+    "description": "Label of the 'Load' button"
+  },
+
+  "__WET_LOCALE__": { "message": "de" }
+}
