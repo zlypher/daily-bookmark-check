@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { Toggle } from "./toggle";
+import "./bookmark-item.scss";
 
 export const BookmarkItem = (props) => {
   const { bookmark, status, toggleDelete } = props;

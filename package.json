@@ -5,7 +5,7 @@
   "main": "background.js",
   "scripts": {
     "dev": "run-p dev:parcel dev:ext",
-    "dev:parcel": "parcel watch src/popup.html --public-url .",
+    "dev:parcel": "parcel watch src/index.html --public-url .",
     "dev:ext": "web-ext run"
   },
   "author": "Thomas Prochazka <thomas.prochazka@gmail.com>",

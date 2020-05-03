@@ -1,0 +1,26 @@
+.popup {
+  width: 400px;
+
+  &__btns {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+  }
+
+  &__btn {
+    display: block;
+    padding: 4px;
+    text-align: center;
+    flex: 100% 1 1;
+    background: none;
+    border: 1px solid gray;
+    border-radius: 4px;
+    line-height: 30px;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  &__load-btn {
+    margin-right: 16px;
+  }
+}

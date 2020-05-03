@@ -2,6 +2,7 @@ import { getRandom } from "../utils";
 import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { BookmarkList } from "./bookmark-list";
+import "./popup.scss";
 
 const toItem = (bookmark) => {
   return {

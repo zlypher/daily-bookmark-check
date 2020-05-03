@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { BookmarkItem } from "./bookmark-item";
+import "./bookmark-list.scss";
 
 export const BookmarkList = (props) => {
   return (

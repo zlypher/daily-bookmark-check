@@ -1,4 +1,5 @@
 import { h } from "preact";
+import "./toggle.scss";
 
 export const Toggle = (props) => {
   return (
