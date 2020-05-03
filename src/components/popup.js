@@ -6,6 +6,7 @@ import { BookmarkList } from "./bookmark-list";
 const toItem = (bookmark) => {
   return {
     status: "active",
+    toggleDelete: true,
     id: bookmark.id,
     bookmark: bookmark,
   };
@@ -31,6 +32,7 @@ const loadBookmarks = async () => {
 const getEmptyBookmarkItem = () => {
   return {
     status: "empty",
+    toggleDelete: true,
     bookmark: {
       title: "-",
       url: "-",
@@ -46,8 +48,19 @@ export const Popup = () => {
     setBookmarks(data);
   }, []);
 
-  const onToggleItemStatus = () => {
-    console.log("toggle item status");
+  const onToggleItemStatus = (bookmarkId) => {
+    const idx = bookmarks.findIndex((b) => b.bookmark.id === bookmarkId);
+    const bm = bookmarks[idx];
+    const newBookmarks = [
+      ...bookmarks.slice(0, idx),
+      {
+        ...bm,
+        toggleDelete: !bm.toggleDelete,
+      },
+      ...bookmarks.slice(idx + 1),
+    ];
+
+    setBookmarks(newBookmarks);
   };
 
   const onLoadClick = () => {
