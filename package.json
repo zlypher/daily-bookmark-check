@@ -4,6 +4,7 @@
   "description": "Daily Bookmark Check helps you cleanup your bookmarks step by step.",
   "main": "background.js",
   "scripts": {
+    "translate": "wet",
     "dev": "run-p dev:parcel dev:ext",
     "dev:parcel": "parcel watch src/index.html --public-url .",
     "dev:ext": "web-ext run"
