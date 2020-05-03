@@ -3,20 +3,20 @@ import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { BookmarkList } from "./bookmark-list";
 import "./popup.scss";
+import { getAllBookmarks, removeBookmarks } from "../extension-api";
 
 const toItem = (bookmark) => {
   return {
     status: "active",
-    toggleDelete: true,
+    toggleDelete: false,
     id: bookmark.id,
     bookmark: bookmark,
   };
 };
 
 const loadBookmarks = async () => {
-  const allBookmarks = (await browser.bookmarks.search({})).filter(
-    (b) => b.type === "bookmark",
-  );
+  const allBookmarks = await getAllBookmarks();
+  console.log(allBookmarks);
 
   const numBookmarks = allBookmarks.length;
   const emptyItems =
@@ -33,7 +33,7 @@ const loadBookmarks = async () => {
 const getEmptyBookmarkItem = () => {
   return {
     status: "empty",
-    toggleDelete: true,
+    toggleDelete: false,
     bookmark: {
       title: "-",
       url: "-",
@@ -64,13 +64,20 @@ export const Popup = () => {
     setBookmarks(newBookmarks);
   };
 
-  const onLoadClick = () => {
-    console.log("load");
+  const onLoadClick = async () => {
+    const data = await loadBookmarks();
+    setBookmarks(data);
   };
 
-  const onCleanClick = () => {
-    console.log("clean");
+  const onCleanClick = async () => {
+    const idsToDelete = bookmarks
+      .filter((b) => b.toggleDelete)
+      .map((b) => b.id);
+
+    await removeBookmarks(idsToDelete);
   };
+
+  const isCleanEnabled = bookmarks.some((b) => b.toggleDelete);
 
   return (
     <div className="popup">
@@ -88,6 +95,7 @@ export const Popup = () => {
         <button
           className="js-popup__clean-btn popup__clean-btn popup__btn"
           onClick={onCleanClick}
+          disabled={isCleanEnabled ? null : "disabled"}
         >
           Clean
         </button>
