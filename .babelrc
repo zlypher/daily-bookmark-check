@@ -1,11 +1,10 @@
 {
   "presets": [
+    "@babel/env",
     [
-      "env",
+      "@babel/preset-react",
       {
-        "targets": {
-          "browsers": ["last 2 Chrome versions"]
-        }
+        "pragma": "h"
       }
     ]
   ]

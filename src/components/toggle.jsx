@@ -15,7 +15,7 @@ export const Toggle = (props) => {
     }
 
     props.onClick(...args);
-  }
+  };
   return (
     <div
       onClick={onClick}
@@ -24,7 +24,7 @@ export const Toggle = (props) => {
       tabindex="0"
     >
       <span className="toggle__bg"></span>
-      <span className="toggle__btn"></span>
+      <span className="toggle__btn" role="button"></span>
     </div>
   );
 };
