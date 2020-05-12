@@ -4,11 +4,13 @@ import { useState, useEffect } from "preact/hooks";
 import { BookmarkList } from "./bookmark-list";
 import "./popup.scss";
 import { getAllBookmarks, removeBookmarks, getMessage } from "../extension-api";
+import { BookmarkStatus } from "./bookmark-item";
+import { ToggleStatus, Toggle } from "./toggle";
 
 const toItem = (bookmark) => {
   return {
-    status: "active",
-    toggleDelete: false,
+    status: BookmarkStatus.Active,
+    toggleStatus: ToggleStatus.Off,
     id: bookmark.id,
     bookmark: bookmark,
   };
@@ -27,13 +29,13 @@ const loadBookmarks = async () => {
   const selectedBookmarks =
     numBookmarks <= 3 ? allBookmarks : getRandom(allBookmarks, 3);
 
-  return [...selectedBookmarks, ...emptyItems].map(toItem);
+  return [...selectedBookmarks.map(toItem), ...emptyItems];
 };
 
 const getEmptyBookmarkItem = () => {
   return {
-    status: "empty",
-    toggleDelete: false,
+    status: BookmarkStatus.Empty,
+    toggleStatus: ToggleStatus.Unset,
     bookmark: {
       title: "-",
       url: "-",
@@ -56,7 +58,10 @@ export const Popup = () => {
       ...bookmarks.slice(0, idx),
       {
         ...bm,
-        toggleDelete: !bm.toggleDelete,
+        toggleStatus:
+          bm.toggleStatus === ToggleStatus.On
+            ? ToggleStatus.Off
+            : ToggleStatus.On,
       },
       ...bookmarks.slice(idx + 1),
     ];
@@ -71,13 +76,29 @@ export const Popup = () => {
 
   const onCleanClick = async () => {
     const idsToDelete = bookmarks
-      .filter((b) => b.toggleDelete)
+      .filter((b) => b.toggleStatus === ToggleStatus.On)
+      .filter((b) => b.status !== BookmarkStatus.Deleted)
       .map((b) => b.id);
 
+    const newBookmarks = bookmarks.map((b) => {
+      const isDeleted = idsToDelete.includes(b.id);
+      return {
+        toggleStatus: isDeleted ? ToggleStatus.Unset : b.toggleStatus,
+        status: isDeleted ? BookmarkStatus.Deleted : b.status,
+        bookmark: {
+          ...b.bookmark,
+        },
+      };
+    });
+
+    setBookmarks(newBookmarks);
     await removeBookmarks(idsToDelete);
   };
 
-  const isCleanEnabled = bookmarks.some((b) => b.toggleDelete);
+  const isCleanEnabled = bookmarks.some(
+    (b) =>
+      b.toggleStatus === ToggleStatus.On && b.status === BookmarkStatus.Active,
+  );
 
   return (
     <div className="popup">

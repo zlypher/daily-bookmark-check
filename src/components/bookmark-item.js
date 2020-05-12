@@ -3,8 +3,14 @@ import { Toggle } from "./toggle";
 import "./bookmark-item.scss";
 import { ExternalLink } from "./external-link";
 
+export const BookmarkStatus = {
+  Active: "active",
+  Deleted: "deleted",
+  Empty: "empty",
+};
+
 export const BookmarkItem = (props) => {
-  const { bookmark, status, toggleDelete } = props;
+  const { bookmark, status, toggleStatus } = props;
   return (
     <div className={`bookmark-item js-bookmark-item bookmark-item--${status}`}>
       <ExternalLink className="bookmark-item__external" href={bookmark.url} />
@@ -19,9 +25,12 @@ export const BookmarkItem = (props) => {
       <div>
         <Toggle
           onClick={() => props.onToggleStatus(bookmark.id)}
-          on={toggleDelete}
+          status={toggleStatus}
         />
       </div>
+      {status === BookmarkStatus.Deleted && (
+        <div class="bookmark-item__delete-overlay">✔️ Bookmark removed</div>
+      )}
     </div>
   );
 };

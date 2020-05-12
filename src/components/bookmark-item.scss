@@ -1,9 +1,11 @@
 .bookmark-item {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 12px;
+  padding: 4px;
+  border-radius: 4px;
 
   &__external {
     flex-shrink: 0;
@@ -30,5 +32,21 @@
     text-overflow: ellipsis;
     font-size: 12px;
     font-weight: 300;
+  }
+
+  &__delete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(245, 101, 101, 0.9);
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    font-size: 16px;
+    font-weight: bold;
   }
 }
