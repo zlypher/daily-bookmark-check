@@ -1,4 +1,19 @@
 {
+  "extensionName": {
+    "message": "Daily Bookmark Check",
+    "description": "Name of the extension",
+    "hash": "c31431a23ec02d23daa2691dbcf6eb73"
+  },
+  "extensionDescription": {
+    "message": "Suggests 3 random bookmarks to cleanup.",
+    "description": "Description of the extension",
+    "hash": "d35af11f82c0cc48ec40521c40cfc344"
+  },
+  "popupTitle": {
+    "message": "Cleanup bookmarks",
+    "description": "Title of the popup action",
+    "hash": "c0996c2a12cc373d295c54243ce319cd"
+  },
   "buttonClean": {
     "message": "Clean",
     "description": "Label of the 'Clean' button",
@@ -8,6 +23,10 @@
     "message": "Load",
     "description": "Label of the 'Load' button",
     "hash": "d2e858432cac4e7ba0695d6aa1ed88da"
+  },
+  "bookmarkRemoved": {
+    "message": "✔️ Bookmark removed",
+    "hash": "3400387b77469234d8aed09e681069fa"
   },
 
   "__WET_LOCALE__": { "message": "en" }

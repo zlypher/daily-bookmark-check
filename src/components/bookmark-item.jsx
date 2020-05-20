@@ -1,6 +1,7 @@
 import { h } from "preact";
 import { Toggle } from "./toggle";
 import "./bookmark-item.scss";
+import { getMessage } from "../extension-api";
 import { ExternalLink } from "./external-link";
 
 export const BookmarkStatus = {
@@ -29,7 +30,9 @@ export const BookmarkItem = (props) => {
         />
       </div>
       {status === BookmarkStatus.Deleted && (
-        <div class="bookmark-item__delete-overlay">✔️ Bookmark removed</div>
+        <div class="bookmark-item__delete-overlay">
+          {getMessage("bookmarkRemoved")}
+        </div>
       )}
     </div>
   );

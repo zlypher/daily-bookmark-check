@@ -1,4 +1,16 @@
 {
+  "extensionName": {
+    "message": "Daily Bookmark Check",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Schlägt täglich 3 Lesezeichen zum Aufräumen vor.",
+    "description": "Description of the extension"
+  },
+  "popupTitle": {
+    "message": "Lesezeichen aufräumen",
+    "description": "Title of the popup action"
+  },
   "buttonClean": {
     "message": "Aufräumen",
     "description": "Label of the 'Clean' button"
@@ -6,6 +18,9 @@
   "buttonLoad": {
     "message": "Neu laden",
     "description": "Label of the 'Load' button"
+  },
+  "bookmarkRemoved": {
+    "message": "✔️ Lesezeichen gelöscht"
   },
 
   "__WET_LOCALE__": { "message": "de" }
