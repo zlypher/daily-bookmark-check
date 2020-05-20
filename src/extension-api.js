@@ -9,3 +9,7 @@ export const getAllBookmarks = async () => {
 };
 
 export const getMessage = (...args) => browser.i18n.getMessage(...args);
+
+export const getLocalStorage = (...args) => browser.storage.local.get(...args);
+
+export const setLocalStorage = (...args) => browser.storage.local.set(...args);

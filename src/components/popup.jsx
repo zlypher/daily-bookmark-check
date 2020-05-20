@@ -1,11 +1,17 @@
-import { getRandom } from "../utils";
+import { getRandom, isToday } from "../utils";
 import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { BookmarkList } from "./bookmark-list";
 import "./popup.scss";
-import { getAllBookmarks, removeBookmarks, getMessage } from "../extension-api";
+import {
+  getAllBookmarks,
+  removeBookmarks,
+  getMessage,
+  getLocalStorage,
+  setLocalStorage,
+} from "../extension-api";
 import { BookmarkStatus } from "./bookmark-item";
-import { ToggleStatus, Toggle } from "./toggle";
+import { ToggleStatus } from "./toggle";
 
 const toItem = (bookmark) => {
   return {
@@ -44,10 +50,31 @@ const getEmptyBookmarkItem = () => {
   };
 };
 
+const loadPopupData = async () => {
+  const { date, bookmarks } = await getLocalStorage(["date", "bookmarks"]);
+  // If the bookmarks are already from today, return them
+  if (!!date && isToday(date)) {
+    return bookmarks;
+  }
+
+  // Load new bookmarks, store and return
+  return await loadAndSetNewBookmarks();
+};
+
+const loadAndSetNewBookmarks = async () => {
+  const newBookmarks = await loadBookmarks();
+  setLocalStorage({
+    date: new Date(),
+    bookmarks: newBookmarks,
+  });
+
+  return newBookmarks;
+};
+
 export const Popup = () => {
   const [bookmarks, setBookmarks] = useState([]);
   useEffect(async () => {
-    const data = await loadBookmarks();
+    const data = await loadPopupData();
     setBookmarks(data);
   }, []);
 
@@ -70,7 +97,7 @@ export const Popup = () => {
   };
 
   const onLoadClick = async () => {
-    const data = await loadBookmarks();
+    const data = await loadAndSetNewBookmarks();
     setBookmarks(data);
   };
 
